@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Project Elijah</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <div class="logo-area">
+    <img src="logo1.png" alt="Project Elijah Logo">
+    <img src="logo2.png" alt="Project Elijah Logo">
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="partners.html">Our Partners</a></li>
+      <li><a class="donate-btn" href="donate.html">Donate</a></li>
+      <li><a class="chat-btn" href="chat.html">Chat with AI</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- BANNER -->
+<section class="page-banner">
+  <h1>Contact Us</h1>
+</section>
+
+<!-- CONTACT INFO -->
+<section class="contact-info">
+
+  <div class="contact-card">
+    <h3>Phone</h3>
+    <button onclick="toggleContact()">Contact Us</button>
+
+    <div id="contact" style="display:none;">
+      <a href="tel:09505780929">📞 Call</a><br>
+      <a href="sms:09505780929">💬 Text</a>
+    </div>
+
+    <script>
+      function toggleContact() {
+        const contact = document.getElementById("contact");
+
+      if (contact.style.display === "none") {
+        contact.style.display = "block";
+        } else {
+        contact.style.display = "none";
+        }
+      }
+    </script>
+    <p>+63 950 578 0929</p>
+  </div>
+
+  <div class="contact-card">
+    <h3>Email</h3>
+    <a href="mailto:projectelijah@gmail.com">
+    <p>projectelijah@gmail.com</p>
+    </a>
+  </div>
+
+  <div class="contact-card">
+    <h3>Facebook</h3>
+    <a href="https://web.facebook.com/profile.php?id=61555025315039" target="_blank" rel="noopener">Visit Facebook Page</a>
+  </div>
+
+  <div class="contact-card">
+    <h3>Address</h3>
+    <a  href="https://www.google.com/maps/place/Sagnay,+Camarines+Sur/@13.570099,123.480035,13z/data=!3m1!4b1!4m6!3m5!1s0x33a1bf497e6e5e35:0x27303e5167ef1a23!8m2!3d13.5617176!4d123.5056016!16zL20vMDZwbmpy?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+    <p>Sañgay, Camarines Sur, Philippines</p>
+    </a>
+  </div>
+
+</section>
+
+<!-- USER FEEDBACK -->
+<div class="feedback-form">
+
+  <form id="feedback-form" action="https://formspree.io/f/mgojypan" method="POST">
+    <h2>Share your Feedback with Us!</h2>
+    <div class="form-group">
+      <label for="feedback-name">Name</label>
+      <input type="text" id="feedback-name" name="name" placeholder="Your name/Nickname" required />
+    </div>
+
+    <div class="form-group">
+      <label for="feedback-email">Email <span class="optional">(optional)</span></label>
+      <input type="email" id="feedback-email" name="email" placeholder="youremail@example.com" />
+    </div>
+
+    <div class="form-group">
+      <label>How would you rate your experience?</label>
+      <div class="star-rating">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+      </div>
+      <input type="hidden" id="rating-input" name="rating" value="No rating given" />
+    </div>
+
+    <div class="form-group">
+      <label for="feedback-message">Your Message</label>
+      <textarea id="feedback-message" name="message" rows="5" placeholder="Tell us about your experience, suggestions, or prayers..." required></textarea>
+    </div>
+
+    <button type="submit" class="feedback-submit-btn">Send Feedback</button>
+
+    <div id="feedback-success" class="feedback-success" style="display:none;">
+      Thank you for your feedback! God bless you and your Family!
+    </div>
+
+  </form>
+</div>
+
+<script>
+  // Star rating
+  const stars = document.querySelectorAll('.star');
+  let selectedRating = 0;
+
+  stars.forEach(star => {
+    star.addEventListener('mouseover', () => {
+      const val = parseInt(star.dataset.value);
+      stars.forEach(s => s.classList.toggle('hovered', parseInt(s.dataset.value) <= val));
+    });
+    star.addEventListener('mouseout', () => {
+      stars.forEach(s => s.classList.remove('hovered'));
+    });
+    star.addEventListener('click', () => {
+      selectedRating = parseInt(star.dataset.value);
+      stars.forEach(s => s.classList.toggle('selected', parseInt(s.dataset.value) <= selectedRating));
+      document.getElementById('rating-input').value = selectedRating + ' out of 5 stars';
+    });
+  });
+
+  // Handle form submission via fetch (no page redirect)
+  const feedbackForm = document.getElementById('feedback-form');
+
+  feedbackForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const submitBtn = feedbackForm.querySelector('.feedback-submit-btn');
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    const formData = new FormData(feedbackForm);
+
+    try {
+      const response = await fetch(feedbackForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        // Show success
+        feedbackForm.style.opacity = '0.4';
+        feedbackForm.style.pointerEvents = 'none';
+        document.getElementById('feedback-success').style.display = 'block';
+
+        // Reset after 4 seconds
+        setTimeout(() => {
+          feedbackForm.reset();
+          feedbackForm.style.opacity = '1';
+          feedbackForm.style.pointerEvents = 'auto';
+          document.getElementById('feedback-success').style.display = 'none';
+          selectedRating = 0;
+          stars.forEach(s => s.classList.remove('selected'));
+          document.getElementById('rating-input').value = 'No rating given';
+          submitBtn.textContent = 'Send Feedback';
+          submitBtn.disabled = false;
+        }, 4000);
+
+      } else {
+        alert('Oops! Something went wrong. Please try again.');
+        submitBtn.textContent = 'Send Feedback';
+        submitBtn.disabled = false;
+      }
+
+    } catch (error) {
+      alert('Network error. Please check your connection and try again.');
+      submitBtn.textContent = 'Send Feedback';
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+<!-- FOOTER -->
+<footer>
+  <p>To God be all the Glory &nbsp;|&nbsp; All Rights Reserved</p>
+  <p>Project Elijah</p>
+</footer>
+
+<button id="topBtn">↑</button>
+
+<script src="script.js"></script>
+</body>
+</html>
