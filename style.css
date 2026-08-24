@@ -374,31 +374,6 @@ section:not(.hero):not(.page-banner) + section { }
 }
 
 /* ============================================================
-   SCROLL ANIMATION CLASSES
-   ============================================================ */
-.slide-left,
-.slide-right,
-.fade-up {
-  opacity: 0;
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.slide-left  { transform: translateX(-60px); }
-.slide-right { transform: translateX(60px); }
-.fade-up     { transform: translateY(40px); }
-
-.slide-left.visible,
-.slide-right.visible,
-.fade-up.visible {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-
-/* Stagger delays for grid images */
-.grid img:nth-child(odd)  { }
-.grid img:nth-child(even) { }
-
-/* ============================================================
    STATS
    ============================================================ */
 .stats {
