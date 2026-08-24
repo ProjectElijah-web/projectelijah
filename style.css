@@ -191,7 +191,7 @@ nav ul li a.donate-btn.active {
    PAGE OFFSET (fixed nav)
    ============================================================ */
 body > section:first-of-type,
-.hero { padding-top: 0; }
+.hero { padding-top: -5; }
 
 section:not(.hero):not(.page-banner) + section { }
 
